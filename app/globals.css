@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-bg-deep: #131526;
+  --color-bg: #131526;
+  --color-surface: #1a1c30;
+  --color-surface-2: #232333;
+  --color-border: #232333;
+  --color-border-strong: rgba(255, 255, 255, 0.16);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-gold: #f5c518;
+  --color-gold-soft: #ffe68b;
+  --color-gold-deep: #c0830b;
+  --color-gold-mid: #daa520;
+  --color-gold-amber: #a67c00;
+
+  --color-accent-blue: #0112fe;
+  --color-accent-violet: #5d5694;
+  --color-accent-magenta: #f9e000;
+
+  --color-text: #ffffff;
+  --color-text-muted: #a9a7bc;
+  --color-text-dim: #6f6b81;
+  --color-text-purple: #7a76ab;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --radius-card: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: transparent;
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #131526;
+}
+
+@layer utilities {
+  .gold-gradient-text {
+    background-image: linear-gradient(65deg, #c0830b, #ffe68b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gold-border-card {
+    background-image: linear-gradient(
+      to bottom right,
+      #daa520 0%,
+      #a67c00 30%,
+      #131526 90%
+    );
+  }
+
+  .glass {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+  }
+
+  .scroll-mt-header {
+    scroll-margin-top: 80px;
+  }
+}
+
+::selection {
+  background: rgba(245, 197, 24, 0.35);
+  color: #fff;
+}
+
+@keyframes fallDown {
+  0% {
+    transform: translate3d(0, -120px, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(var(--sway, 0px), 110vh, 0) rotate(180deg);
+  }
 }
