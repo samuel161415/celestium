@@ -30,6 +30,20 @@ function UsFlag({ className = "" }: { className?: string }) {
   );
 }
 
+function LanguageButton() {
+  return (
+    <button
+      type="button"
+      aria-label="Language"
+      className="flex items-center space-x-2 rounded-md px-3 py-2 text-white/80 transition-colors duration-300 hover:bg-[#232333]/50 hover:text-yellow-500"
+    >
+      <UsFlag className="mr-1 mt-0.5 h-4 w-5 overflow-hidden rounded" />
+      <span className="ml-2 text-sm font-medium">English</span>
+      <ChevronDown size={14} className="ml-1" />
+    </button>
+  );
+}
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -59,12 +73,12 @@ export function Header() {
         ].join(" ")}
       >
         <div className="container mx-auto px-4 md:px-8">
-          <nav className="flex items-center justify-between">
+          <nav className="flex items-center justify-between gap-4">
             <a href="#home" className="flex items-center">
               <Logo />
             </a>
 
-            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-10 xl:flex">
+            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-8 lg:flex">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
@@ -77,34 +91,14 @@ export function Header() {
               ))}
             </div>
 
-            <div className="hidden items-center space-x-3 xl:flex">
-              <button
-                type="button"
-                aria-label="Language"
-                className="flex items-center space-x-2 rounded-md px-3 py-2 text-white/80 transition-colors duration-300 hover:bg-[#232333]/50 hover:text-yellow-500"
-              >
-                <UsFlag className="mr-1 mt-0.5 h-4 w-5 overflow-hidden rounded" />
-                <span className="ml-2 text-sm font-medium">English</span>
-                <ChevronDown size={14} className="ml-1" />
-              </button>
-            </div>
-
-            <div className="flex items-center space-x-3 xl:hidden">
-              <button
-                type="button"
-                aria-label="Language"
-                className="flex items-center space-x-2 rounded-md px-3 py-2 text-white/80 transition-colors duration-300 hover:bg-[#232333]/50 hover:text-yellow-500"
-              >
-                <UsFlag className="mr-1 mt-0.5 h-4 w-5 overflow-hidden rounded" />
-                <span className="ml-2 text-sm font-medium">English</span>
-                <ChevronDown size={14} />
-              </button>
+            <div className="flex items-center gap-2">
+              <LanguageButton />
               <button
                 type="button"
                 aria-label="Open menu"
                 aria-expanded={open}
                 onClick={() => setOpen(true)}
-                className="rounded-md border border-[#232333] p-2 text-white transition-colors duration-300 hover:bg-[#232333]/50"
+                className="rounded-md border border-[#232333] p-2 text-white transition-colors duration-300 hover:bg-[#232333]/50 lg:hidden"
               >
                 <Menu size={20} />
               </button>
@@ -117,7 +111,7 @@ export function Header() {
         {open && (
           <motion.div
             key="drawer"
-            className="fixed inset-0 z-50 xl:hidden"
+            className="fixed inset-0 z-50 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

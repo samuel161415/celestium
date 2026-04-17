@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { GoldBorderCard } from "../ui/GoldBorderCard";
 import { Reveal } from "../ui/Reveal";
+import { EcosystemDiagramSwitcher } from "./EcosystemDiagramSwitcher";
 
 function HorizontalArrow({ flipped = false }: { flipped?: boolean }) {
   return (
@@ -112,8 +113,229 @@ function CoreCenter() {
   return (
     <div className="relative flex flex-col items-center justify-center pt-12">
       <div
-        className="absolute top-[calc(50%+24px)] left-[-90px] z-30 hidden md:block"
+        className="absolute top-1/2 left-[-80px] z-30 hidden w-[70px] -translate-y-1/2 md:block"
         aria-hidden
+      >
+        <HorizontalArrow />
+      </div>
+      <div
+        className="core-pulse rounded-md p-px transition-all duration-300"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom right, #FFD700, #FFA500, #FF8C00)",
+        }}
+      >
+        <div
+          className="rounded-md px-10 py-5 text-lg font-medium whitespace-nowrap text-black transition-all"
+          style={{
+            backgroundImage: "linear-gradient(to right, #C0830B, #FFE68B)",
+          }}
+        >
+          Celestium CORE
+        </div>
+      </div>
+      <div
+        className="absolute top-1/2 right-[-80px] z-30 hidden w-[70px] -translate-y-1/2 md:block"
+        aria-hidden
+      >
+        <HorizontalArrow flipped />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Top connecting flow — rectangle with arrowhead at bottom-right corner.
+ * The rectangle is open at the bottom: top edge + left edge + right edge with
+ * an arrowhead at the bottom-right end, pointing down into the Game contract pill.
+ * SVG stretches horizontally via the parent's `left-[20%] right-[25%]` so the
+ * rectangle's two vertical legs land on the contract pills automatically.
+ */
+const TOP_RAIL_D =
+  "M1 1V0.5H0.5V1H1ZM423 1H423.5V0.5H423V1ZM422.646 25.3536C422.842 25.5488 423.158 25.5488 423.354 25.3536L426.536 22.1716C426.731 21.9763 426.731 21.6597 426.536 21.4645C426.34 21.2692 426.024 21.2692 425.828 21.4645L423 24.2929L420.172 21.4645C419.976 21.2692 419.66 21.2692 419.465 21.4645C419.269 21.6597 419.269 21.9763 419.465 22.1716L422.646 25.3536ZM1.5 25V1H0.5V25H1.5ZM1 1.5H423V0.5H1V1.5ZM422.5 1V25H423.5V1H422.5Z";
+
+function TopConnectingFlow() {
+  return (
+    <div className="absolute top-[32%] left-[20%] right-[25%]" aria-hidden>
+      <svg
+        width="427"
+        height="26"
+        viewBox="0 0 427 26"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full overflow-visible"
+      >
+        <title>Top Connecting Flow</title>
+        <path d={TOP_RAIL_D} stroke="#7CAEFF" strokeWidth="1" />
+        <circle
+          cx="1"
+          cy="1"
+          r="3"
+          fill="#7CAEFF"
+          style={{ filter: "drop-shadow(0 0 2px #7CAEFF)" }}
+        />
+        {/* Single particle traveling clockwise along the rectangle path */}
+        <circle
+          r="3"
+          fill="#7CAEFF"
+          className="flow-particle"
+          style={{ filter: "drop-shadow(0 0 3px #7CAEFF)" }}
+        >
+          <animateMotion
+            dur="6s"
+            repeatCount="indefinite"
+            rotate="auto"
+            path={TOP_RAIL_D}
+          />
+        </circle>
+      </svg>
+      <div
+        className="absolute bottom-[150%] left-1/2 w-40 -translate-x-1/2 text-center text-xs"
+        style={{ color: "#7CAEFF" }}
+      >
+        Liquidity for winnings & DAO voting of results
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Bottom connecting flow — rectangle with arrowhead at bottom-left corner,
+ * pointing up into the Staking contract pill.
+ */
+const BOTTOM_RAIL_D =
+  "M426 25V25.5H426.5V25H426ZM3.99997 25H3.49997V25.5H3.99997V25ZM4.35355 0.646446C4.15826 0.451183 3.84171 0.451183 3.64642 0.646446L0.464447 3.82843C0.269196 4.02369 0.269196 4.34027 0.464447 4.53553C0.659698 4.73079 0.976288 4.73079 1.17154 4.53553L3.99997 1.70711L6.8284 4.53553C7.02368 4.73079 7.34024 4.73079 7.53552 4.53553C7.73077 4.34027 7.73077 4.02369 7.53552 3.82843L4.35355 0.646446ZM425.5 1V25H426.5V1H425.5ZM426 24.5H3.99997V25.5H426V24.5ZM4.49997 25V1H3.49997V25H4.49997Z";
+
+function BottomConnectingFlow() {
+  return (
+    <div className="absolute bottom-[10%] left-[20%] right-[25%]" aria-hidden>
+      <svg
+        width="427"
+        height="26"
+        viewBox="0 0 427 26"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full overflow-visible"
+      >
+        <title>Bottom Connecting Flow</title>
+        <path d={BOTTOM_RAIL_D} stroke="#D97F00" strokeWidth="1" />
+        <circle
+          cx="426"
+          cy="25"
+          r="3"
+          fill="#D97F00"
+          style={{ filter: "drop-shadow(0 0 2px #D97F00)" }}
+        />
+        {/* Single particle traveling along the rectangle path */}
+        <circle
+          r="3"
+          fill="#D97F00"
+          className="flow-particle"
+          style={{ filter: "drop-shadow(0 0 3px #D97F00)" }}
+        >
+          <animateMotion
+            dur="6s"
+            repeatCount="indefinite"
+            rotate="auto"
+            path={BOTTOM_RAIL_D}
+          />
+        </circle>
+      </svg>
+      <div
+        className="absolute bottom-[-25px] left-1/2 -translate-x-1/2 text-center text-xs whitespace-nowrap"
+        style={{ color: "#D97F00" }}
+      >
+        Lost bets and winning fees
+      </div>
+    </div>
+  );
+}
+
+export function EcosystemDiagram() {
+  return (
+    <div className="group/diagram relative w-full">
+      <div className="relative flex flex-col gap-x-16 md:flex-row">
+        <SidePartnerCard
+          title="Celestium staking partner's page"
+          flowLabel="Staking"
+          nodeLabel="Staker"
+          contractLabel="Staking contract"
+        />
+        <CoreCenter />
+        <SidePartnerCard
+          reverse
+          title="Celestium gaming partner's page"
+          flowLabel="Betting"
+          nodeLabel="Player"
+          contractLabel="Game contract"
+        />
+        <TopConnectingFlow />
+        <BottomConnectingFlow />
+      </div>
+    </div>
+  );
+}
+
+function MobileStakingFlow() {
+  return (
+    <div className="ml-6 mt-4 flex flex-1 rotate-90 flex-col items-center">
+      <span className="mb-1 text-sm text-[#6A6A9F]">Staking</span>
+      <HorizontalArrow />
+    </div>
+  );
+}
+
+function MobileBettingFlow() {
+  return (
+    <div className="ml-6 mt-3 flex flex-1 rotate-90 flex-col items-center">
+      <span className="mb-1 text-sm text-[#6A6A9F]">Betting</span>
+      <HorizontalArrow flipped />
+    </div>
+  );
+}
+
+function MobileStakingCard() {
+  return (
+    <GoldBorderCard
+      className="w-[320px]"
+      innerClassName="px-8 py-6 flex flex-col items-center"
+    >
+      <h3 className="mb-4 text-center text-lg font-bold text-white">
+        Celestium staking partner&apos;s page
+      </h3>
+      <div className="flex w-fit flex-col items-center gap-y-8">
+        <FoxNode label="Staker" />
+        <MobileStakingFlow />
+        <ContractPill>Staking contract</ContractPill>
+      </div>
+    </GoldBorderCard>
+  );
+}
+
+function MobileGamingCard() {
+  return (
+    <GoldBorderCard
+      className="w-[320px]"
+      innerClassName="px-8 py-6 flex flex-col items-center"
+    >
+      <div className="flex w-fit flex-col items-center gap-y-8">
+        <ContractPill>Game contract</ContractPill>
+        <MobileBettingFlow />
+        <FoxNode label="Player" />
+      </div>
+      <h3 className="mt-4 text-center text-lg font-bold text-white">
+        Celestium gaming partner&apos;s page
+      </h3>
+    </GoldBorderCard>
+  );
+}
+
+function MobileCoreBlock() {
+  return (
+    <div className="relative my-14 flex h-[160px] flex-col items-center justify-center">
+      <div
+        aria-hidden
+        className="absolute -top-[10px] left-[56px] z-30 rotate-90"
       >
         <HorizontalArrow />
       </div>
@@ -134,8 +356,8 @@ function CoreCenter() {
         </div>
       </div>
       <div
-        className="absolute top-[calc(50%+24px)] right-[-90px] z-30 hidden md:block"
         aria-hidden
+        className="absolute -bottom-[10px] right-[56px] z-30 rotate-90"
       >
         <HorizontalArrow flipped />
       </div>
@@ -143,95 +365,72 @@ function CoreCenter() {
   );
 }
 
-function FlowLoop({
-  label,
-  color,
-  position,
-}: {
-  label: string;
-  color: string;
-  position: "top" | "bottom";
-}) {
-  const isTop = position === "top";
+function MobileFlowRails() {
   return (
-    <div
-      className={[
-        "absolute left-[20%] right-[25%]",
-        isTop ? "top-[28%]" : "bottom-[12%]",
-      ].join(" ")}
-      aria-hidden
-    >
-      <svg
-        viewBox="0 0 427 26"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full"
-      >
-        {isTop ? (
-          <>
+    <div className="absolute top-[calc(50%-16px)] h-[400px] w-[300px]">
+      <div className="relative h-full w-full">
+        <div className="absolute -left-[20px] w-[600px] rotate-90">
+          <svg
+            width="427"
+            height="26"
+            viewBox="0 0 427 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full"
+            aria-hidden
+          >
             <path
               d="M1 1V0.5H0.5V1H1ZM423 1H423.5V0.5H423V1ZM422.646 25.3536C422.842 25.5488 423.158 25.5488 423.354 25.3536L426.536 22.1716C426.731 21.9763 426.731 21.6597 426.536 21.4645C426.34 21.2692 426.024 21.2692 425.828 21.4645L423 24.2929L420.172 21.4645C419.976 21.2692 419.66 21.2692 419.465 21.4645C419.269 21.6597 419.269 21.9763 419.465 22.1716L422.646 25.3536ZM1.5 25V1H0.5V25H1.5ZM1 1.5H423V0.5H1V1.5ZM422.5 1V25H423.5V1H422.5Z"
-              stroke={color}
-              strokeWidth="1.4"
-              strokeOpacity="0.55"
+              stroke="#7CAEFF"
+              strokeWidth="1"
             />
-            <circle cx="423" cy="13.7" r="3" fill={color} />
-          </>
-        ) : (
-          <>
+            <circle cx="73.12" cy="1" r="3" fill="#7CAEFF" opacity="0.9" />
+            <circle cx="423" cy="5.1" r="2" fill="#7CAEFF" opacity="0.85" />
+          </svg>
+          <div
+            className="absolute top-[16px] left-[300px] -translate-x-1/2 text-xs whitespace-nowrap"
+            style={{ color: "#7CAEFF" }}
+          >
+            Liquidity for winnings & DAO voting of results
+          </div>
+        </div>
+        <div className="absolute -right-[20px] w-[600px] rotate-90">
+          <svg
+            width="427"
+            height="26"
+            viewBox="0 0 427 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full"
+            aria-hidden
+          >
             <path
               d="M426 25V25.5H426.5V25H426ZM4 25H3.5V25.5H4V25ZM4.354 0.646C4.158 0.451 3.842 0.451 3.646 0.646L0.464 3.828C0.269 4.024 0.269 4.34 0.464 4.536C0.66 4.731 0.976 4.731 1.172 4.536L4 1.707L6.828 4.536C7.024 4.731 7.34 4.731 7.536 4.536C7.731 4.34 7.731 4.024 7.536 3.828L4.354 0.646ZM425.5 1V25H426.5V1H425.5ZM426 24.5H4V25.5H426V24.5ZM4.5 25V1H3.5V25H4.5Z"
-              stroke={color}
-              strokeWidth="1.4"
-              strokeOpacity="0.55"
+              stroke="#D97F00"
+              strokeWidth="1"
             />
-            <circle cx="4" cy="12.3" r="3" fill={color} />
-          </>
-        )}
-      </svg>
-      <div
-        className={[
-          "absolute left-1/2 -translate-x-1/2 text-center text-xs",
-          isTop ? "bottom-[150%] w-44" : "bottom-[-25px]",
-        ].join(" ")}
-        style={{ color }}
-      >
-        {label}
+            <circle cx="353.88" cy="25" r="3" fill="#D97F00" opacity="0.9" />
+            <circle cx="4" cy="20.9" r="2" fill="#D97F00" opacity="0.85" />
+          </svg>
+          <div
+            className="absolute bottom-[16px] left-[300px] -translate-x-1/2 text-xs whitespace-nowrap"
+            style={{ color: "#D97F00" }}
+          >
+            Lost bets and winning fees
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-function EcosystemDiagram() {
+export function MobileEcosystemDiagram() {
   return (
-    <div className="relative hidden w-full xl:block">
-      <div className="relative flex flex-col gap-x-16 md:flex-row">
-        <SidePartnerCard
-          title="Celestium staking partner's page"
-          flowLabel="Staking"
-          nodeLabel="Staker"
-          contractLabel="Staking contract"
-        />
-        <CoreCenter />
-        <SidePartnerCard
-          reverse
-          title="Celestium gaming partner's page"
-          flowLabel="Betting"
-          nodeLabel="Player"
-          contractLabel="Game contract"
-        />
-      </div>
-
-      <FlowLoop
-        position="top"
-        color="#7CAEFF"
-        label="Liquidity for winnings & DAO voting of results"
-      />
-      <FlowLoop
-        position="bottom"
-        color="#D97F00"
-        label="Lost bets and winning fees"
-      />
+    <div className="relative mx-auto flex max-w-[380px] flex-col items-center">
+      <MobileStakingCard />
+      <MobileCoreBlock />
+      <MobileGamingCard />
+      <MobileFlowRails />
     </div>
   );
 }
@@ -333,7 +532,7 @@ export function Partner() {
     >
       <div className="container mx-auto max-w-[1240px] px-4 md:px-6 xl:px-0">
         <Reveal>
-          <EcosystemDiagram />
+          <EcosystemDiagramSwitcher />
         </Reveal>
 
         <div className="mt-4 flex flex-col items-center justify-between gap-3 md:flex-row">
