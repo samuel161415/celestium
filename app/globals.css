@@ -92,3 +92,28 @@ body {
     transform: translate3d(var(--sway, 0px), 110vh, 0) rotate(180deg);
   }
 }
+
+@keyframes corePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 197, 24, 0);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 28px 4px rgba(245, 197, 24, 0.45);
+    filter: brightness(1.06);
+  }
+}
+
+.core-pulse {
+  animation: corePulse 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .core-pulse {
+    animation: none;
+  }
+  .flow-particle {
+    display: none;
+  }
+}
