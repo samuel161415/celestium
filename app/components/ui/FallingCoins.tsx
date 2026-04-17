@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 
@@ -33,12 +33,9 @@ function makeCoin(initialDelay = false): Coin {
 
 export function FallingCoins() {
   const reduce = useReducedMotion();
-  const [coins, setCoins] = useState<Coin[]>([]);
-
-  useEffect(() => {
-    if (reduce) return;
-    setCoins(Array.from({ length: COIN_COUNT }, () => makeCoin(true)));
-  }, [reduce]);
+  const [coins, setCoins] = useState<Coin[]>(() =>
+    Array.from({ length: COIN_COUNT }, () => makeCoin(true)),
+  );
 
   const respawn = useCallback((id: number) => {
     setCoins((prev) => prev.map((c) => (c.id === id ? makeCoin() : c)));
@@ -49,7 +46,7 @@ export function FallingCoins() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-[5] overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-5 overflow-hidden"
     >
       {coins.map((c) => {
         const style: CSSProperties & Record<"--sway", string> = {

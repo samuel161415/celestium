@@ -25,19 +25,19 @@ export function Hero() {
 
             <Reveal direction="up" delay={0.25}>
               <div className="mt-8 flex flex-col gap-4 md:flex-row md:gap-6">
-                <div className="flex flex-shrink-0 flex-col gap-3">
+                <div className="flex shrink-0 flex-col gap-3">
                   <button
                     type="button"
-                    className="inline-flex h-12 min-w-[200px] items-center justify-center whitespace-nowrap rounded-md bg-yellow-500 px-4 text-sm font-bold uppercase text-black transition-colors duration-300 hover:bg-yellow-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400"
+                    className="inline-flex h-12 min-w-[200px] items-center justify-center whitespace-nowrap rounded-md bg-yellow-400 px-4 text-sm font-bold uppercase text-black transition-colors duration-300 hover:bg-yellow-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400"
                   >
                     Try our partners
                   </button>
-                  <div className="flex h-12 items-center justify-center gap-4">
+                  {/* <div className="flex h-12 items-center justify-center gap-4">
                     <a
                       href="https://celestium.games"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex h-12 w-full items-center justify-center whitespace-nowrap rounded-md bg-yellow-500 px-4 text-sm font-bold uppercase text-black transition-colors duration-300 hover:bg-yellow-400"
+                      className="inline-flex h-12 w-full items-center justify-center whitespace-nowrap rounded-md bg-yellow-400 px-4 text-sm font-bold uppercase text-black transition-colors duration-300 hover:bg-yellow-500"
                     >
                       celestium.games
                     </a>
@@ -45,11 +45,11 @@ export function Hero() {
                       href="https://celestium.network"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex h-12 w-full items-center justify-center whitespace-nowrap rounded-md bg-yellow-500 px-4 text-sm font-bold uppercase text-black transition-colors duration-300 hover:bg-yellow-400"
+                      className="inline-flex h-12 w-full items-center justify-center whitespace-nowrap rounded-md bg-yellow-400 px-4 text-sm font-bold uppercase text-black transition-colors duration-300 hover:bg-yellow-500"
                     >
                       celestium.network
                     </a>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="flex flex-row items-center justify-center space-x-8 text-start md:flex-col md:items-start md:space-x-0 md:space-y-2">
@@ -80,7 +80,9 @@ export function Hero() {
                 width={460}
                 height={460}
                 priority
+                loading="eager"
                 className="mx-auto h-auto w-full max-w-[360px] select-none object-contain"
+                style={{ width: "auto", height: "auto" }}
               />
             </div>
           </Reveal>
