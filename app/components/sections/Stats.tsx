@@ -2,22 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { GoldBorderCard } from "../ui/GoldBorderCard";
 import { Reveal } from "../ui/Reveal";
-
-function Pill({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div className="flex shrink-0 items-center gap-y-2 rounded-md border-2 border-[#232333] bg-transparent px-3 py-1.5">
-      <span className="mr-2 text-xs text-[#6F6B81]">{label}:</span>
-      {items.map((it, i) => (
-        <span key={it} className="flex items-center">
-          {i > 0 && <span className="mx-2 text-[#6F6B81]">+</span>}
-          <span className="text-xs font-semibold uppercase tracking-wide text-white/80">
-            {it}
-          </span>
-        </span>
-      ))}
-    </div>
-  );
-}
+import { TrustPills } from "../ui/TrustPills";
 
 function StatCard({
   label,
@@ -44,11 +29,7 @@ export function Stats() {
     >
       <div className="container mx-auto max-w-[1240px] px-4 md:px-6 xl:px-0">
         <Reveal>
-          <div className="flex flex-col items-center justify-center gap-3 text-center text-xs text-[#6F6B81] sm:flex-row md:text-start">
-            <Pill label="Audited by" items={["Certik", "Ackee"]} />
-            <Pill label="Powered by" items={["Polygon"]} />
-            <Pill label="Protected by" items={["Chainlink"]} />
-          </div>
+          <TrustPills />
         </Reveal>
 
         <div className="mt-10 flex flex-col-reverse items-center justify-center gap-4 lg:mt-20 lg:flex-row lg:gap-12 xl:gap-20">

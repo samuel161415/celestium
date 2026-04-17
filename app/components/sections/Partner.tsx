@@ -174,7 +174,7 @@ function TopConnectingFlow() {
           fill="#7CAEFF"
           style={{ filter: "drop-shadow(0 0 2px #7CAEFF)" }}
         />
-        {/* Single particle traveling clockwise along the rectangle path */}
+        {/* Single particle: travels left → right along the top edge only */}
         <circle
           r="3"
           fill="#7CAEFF"
@@ -182,10 +182,9 @@ function TopConnectingFlow() {
           style={{ filter: "drop-shadow(0 0 3px #7CAEFF)" }}
         >
           <animateMotion
-            dur="6s"
+            dur="3s"
             repeatCount="indefinite"
-            rotate="auto"
-            path={TOP_RAIL_D}
+            path="M 1 1 L 423 1"
           />
         </circle>
       </svg>
@@ -226,7 +225,7 @@ function BottomConnectingFlow() {
           fill="#D97F00"
           style={{ filter: "drop-shadow(0 0 2px #D97F00)" }}
         />
-        {/* Single particle traveling along the rectangle path */}
+        {/* Single particle: travels right → left along the bottom edge only */}
         <circle
           r="3"
           fill="#D97F00"
@@ -234,10 +233,9 @@ function BottomConnectingFlow() {
           style={{ filter: "drop-shadow(0 0 3px #D97F00)" }}
         >
           <animateMotion
-            dur="6s"
+            dur="3s"
             repeatCount="indefinite"
-            rotate="auto"
-            path={BOTTOM_RAIL_D}
+            path="M 426 25 L 4 25"
           />
         </circle>
       </svg>
