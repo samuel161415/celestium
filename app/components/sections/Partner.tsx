@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, FileText } from "lucide-react";
 import { GoldBorderCard } from "../ui/GoldBorderCard";
 import { Reveal } from "../ui/Reveal";
 
@@ -86,7 +86,9 @@ function SidePartnerCard({
 
   return (
     <GoldBorderCard className="w-fit" innerClassName="px-8 pt-8 pb-12">
-      <h3 className="text-md mb-12 text-center font-bold text-white">{title}</h3>
+      <h3 className="text-md mb-12 text-center font-bold text-white">
+        {title}
+      </h3>
       <div className="flex w-fit items-start gap-x-4">
         {reverse ? (
           <>
@@ -116,7 +118,7 @@ function CoreCenter() {
         <HorizontalArrow />
       </div>
       <div
-        className="rounded-md p-[1px] transition-all duration-300"
+        className="rounded-md p-px transition-all duration-300"
         style={{
           backgroundImage:
             "linear-gradient(to bottom right, #FFD700, #FFA500, #FF8C00)",
@@ -237,7 +239,7 @@ function EcosystemDiagram() {
 function TryLink({ url, label }: { url: string; label: string }) {
   return (
     <div className="flex w-full max-w-md items-center justify-center gap-x-1 text-center">
-      <p className="text-sm text-[#a9a7bc]">Try:</p>
+      <p className="text-sm text-text-muted">Try:</p>
       <a
         href={url}
         target="_blank"
@@ -279,6 +281,12 @@ const SOLUTIONS: SolutionCard[] = [
   },
 ];
 
+const PARTNER_BENEFITS = [
+  "Gain from each bet with zero risk",
+  "Lifetime license for all (future) games",
+  "You can still benefit from affiliate",
+];
+
 function SolutionCardItem({ s, delay }: { s: SolutionCard; delay: number }) {
   return (
     <Reveal delay={delay}>
@@ -297,7 +305,7 @@ function SolutionCardItem({ s, delay }: { s: SolutionCard; delay: number }) {
           href={s.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-md bg-yellow-500 px-5 py-2 text-xs font-bold uppercase tracking-wider text-black transition-colors duration-300 hover:bg-yellow-400"
+          className="inline-flex items-center justify-center rounded-md bg-yellow-400 px-8 py-3 text-xs font-bold uppercase tracking-wider text-black transition-colors duration-300 hover:bg-yellow-500"
         >
           Contact us
         </a>
@@ -332,6 +340,56 @@ export function Partner() {
           <TryLink url="https://celestium.network" label="celestium.network" />
           <TryLink url="https://celestium.games" label="celestium.games" />
         </div>
+
+        <Reveal className="mt-24">
+          <h2 className="mb-6 text-center text-2xl font-bold text-white md:text-4xl">
+            Become a Celestium partner
+          </h2>
+          <p className="mx-auto mb-12 max-w-4xl text-center text-lg leading-relaxed text-text-muted">
+            To become a partner means to purchase a lifetime license for the
+            whole Celestium ecosystem. Build your own independent DeFi business
+            with a custom UI and brand, or use the option of UI rental and
+            regional representation.
+          </p>
+
+          <div className="flex flex-col items-center justify-center w-full">
+            <div className="flex flex-col items-start justify-start max-w-2xl margin-auto ">
+              <div className="mx-auto w-full overflow-hidden rounded-2xl border border-yellow-500/70 bg-[#101323] p-2">
+                <Image
+                  src="/partner-preview.png"
+                  alt="Celestium partner preview"
+                  width={1000}
+                  height={600}
+                  className="h-auto w-full rounded-xl object-cover"
+                />
+              </div>
+
+              <div className="flex justify-between items-center">
+                <ul className=" mt-10 max-w-2xl space-y-4">
+                  {PARTNER_BENEFITS.map((benefit) => (
+                    <li
+                      key={benefit}
+                      className="flex items-start gap-3 text-sm text-[#d9d6e8]"
+                    >
+                      <span className="mt-0.5 text-lg leading-none text-yellow-500">
+                        ✓
+                      </span>
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  className="inline-flex items-center gap-3 rounded-lg bg-[#131625] px-6 py-4 text-sm font-medium text-white transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer ml-5 "
+                  type="button"
+                >
+                  <FileText size={18} className="text-white" />
+                  <span>Docs</span>
+                  <ArrowUpRight size={18} className="text-yellow-500" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
 
         <div className="mt-20 grid grid-cols-1 gap-6 md:grid-cols-3">
           {SOLUTIONS.map((s, i) => (

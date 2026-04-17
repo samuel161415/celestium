@@ -1,5 +1,5 @@
 import { BackgroundLayers } from "./components/ui/BackgroundLayers";
-import { FallingCoins } from "./components/ui/FallingCoins";
+import { FallingCoinsClient } from "./components/ui/FallingCoinsClient";
 import { Header } from "./components/sections/Header";
 import { Hero } from "./components/sections/Hero";
 import { Stats } from "./components/sections/Stats";
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <BackgroundLayers />
-      <FallingCoins />
+      <FallingCoinsClient />
 
       <Header />
       <main className="relative z-10">

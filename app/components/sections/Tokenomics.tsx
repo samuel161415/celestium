@@ -1,7 +1,8 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { ArrowUpRight, FileText, ShieldCheck } from "lucide-react";
-import { PieChart, Pie, ResponsiveContainer, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Reveal } from "../ui/Reveal";
 
 type Slice = { label: string; value: number; color: string };
@@ -33,10 +34,10 @@ function renderLeaderLabel(props: unknown) {
 
   const startX = cx + outerRadius * cos;
   const startY = cy + outerRadius * sin;
-  const elbowX = cx + (outerRadius + 28) * cos;
-  const elbowY = cy + (outerRadius + 28) * sin;
+  const elbowX = cx + (outerRadius + 32) * cos;
+  const elbowY = cy + (outerRadius + 32) * sin;
   const isRight = cos >= 0;
-  const endX = elbowX + (isRight ? 36 : -36);
+  const endX = elbowX + (isRight ? 44 : -44);
   const textAnchor = isRight ? "start" : "end";
 
   return (
@@ -47,7 +48,7 @@ function renderLeaderLabel(props: unknown) {
         strokeWidth={1}
         fill="none"
       />
-      <circle cx={startX} cy={startY} r={2.5} fill={slice.color} />
+      <circle cx={startX} cy={startY} r={3} fill={slice.color} />
       <text
         x={endX + (isRight ? 6 : -6)}
         y={elbowY}
@@ -68,7 +69,7 @@ function CenterLabel() {
       <span className="text-[12px] font-semibold uppercase tracking-widest text-white sm:text-sm">
         CELT TOKEN EMISSION
       </span>
-      <span className="mt-1 font-mono text-sm text-[#a9a7bc] sm:text-base">
+      <span className="mt-1 font-mono text-sm text-text-muted sm:text-base">
         777 777 777 CELT
       </span>
     </div>
@@ -104,7 +105,7 @@ function MobileLegend() {
             className="inline-block h-3 w-3 rounded-sm"
             style={{ backgroundColor: s.color }}
           />
-          <span className="text-[#a9a7bc]">{s.label}</span>
+          <span className="text-text-muted">{s.label}</span>
           <span className="ml-auto font-mono text-xs text-white">
             {s.value}%
           </span>
@@ -114,7 +115,28 @@ function MobileLegend() {
   );
 }
 
+const tooltipStyle = {
+  contentStyle: {
+    background: "#131526",
+    border: "1px solid #232333",
+    borderRadius: 8,
+    color: "#fff",
+    fontSize: 12,
+  },
+  itemStyle: { color: "#fff" },
+};
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+}
+
 export function Tokenomics() {
+  const mounted = useIsMounted();
+
   return (
     <section
       id="tokenomics"
@@ -125,7 +147,7 @@ export function Tokenomics() {
           <h3 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Tokenomics
           </h3>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#a9a7bc]">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-muted">
             All transactions on the Celestium platform are settled by the native
             utility token CELT. The token has stable demand and growing potential
             thanks to a unique business model and sustainable tokenomics.
@@ -142,71 +164,73 @@ export function Tokenomics() {
 
         <Reveal delay={0.25}>
           <div className="mt-12 flex flex-col items-center">
-            <div className="relative aspect-square w-full max-w-[300px] sm:hidden">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={SLICES}
-                    dataKey="value"
-                    nameKey="label"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius="55%"
-                    outerRadius="90%"
-                    paddingAngle={1}
-                    stroke="#131526"
-                    strokeWidth={2}
-                    isAnimationActive
-                    animationDuration={900}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#131526",
-                      border: "1px solid #232333",
-                      borderRadius: 8,
-                      color: "#fff",
-                      fontSize: 12,
-                    }}
-                    itemStyle={{ color: "#fff" }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+            {/* Mobile chart */}
+            <div className="relative w-full max-w-[340px] sm:hidden">
+              {mounted && (
+                <ResponsiveContainer width="100%" aspect={1}>
+                  <PieChart>
+                    <Pie
+                      data={SLICES}
+                      dataKey="value"
+                      nameKey="label"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="55%"
+                      outerRadius="90%"
+                      paddingAngle={2}
+                      stroke="#0d0f1e"
+                      strokeWidth={3}
+                      isAnimationActive
+                      animationDuration={900}
+                    >
+                      {SLICES.map((s) => (
+                        <Cell key={s.label} fill={s.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={tooltipStyle.contentStyle}
+                      itemStyle={tooltipStyle.itemStyle}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
               <CenterLabel />
             </div>
 
-            <div className="relative hidden aspect-square w-full max-w-[480px] sm:block lg:max-w-[580px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart
-                  margin={{ top: 40, right: 110, bottom: 40, left: 110 }}
-                >
-                  <Pie
-                    data={SLICES}
-                    dataKey="value"
-                    nameKey="label"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius="55%"
-                    outerRadius="80%"
-                    paddingAngle={1}
-                    stroke="#131526"
-                    strokeWidth={2}
-                    isAnimationActive
-                    animationDuration={900}
-                    label={renderLeaderLabel}
-                    labelLine={false}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#131526",
-                      border: "1px solid #232333",
-                      borderRadius: 8,
-                      color: "#fff",
-                      fontSize: 12,
-                    }}
-                    itemStyle={{ color: "#fff" }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+            {/* Desktop chart */}
+            <div className="relative hidden w-full max-w-[680px] sm:block lg:max-w-[780px]">
+              {mounted && (
+                <ResponsiveContainer width="100%" aspect={1}>
+                  <PieChart
+                    margin={{ top: 60, right: 140, bottom: 60, left: 140 }}
+                  >
+                    <Pie
+                      data={SLICES}
+                      dataKey="value"
+                      nameKey="label"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="50%"
+                      outerRadius="72%"
+                      paddingAngle={2}
+                      stroke="#0d0f1e"
+                      strokeWidth={3}
+                      isAnimationActive
+                      animationDuration={900}
+                      label={renderLeaderLabel}
+                      labelLine={false}
+                    >
+                      {SLICES.map((s) => (
+                        <Cell key={s.label} fill={s.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={tooltipStyle.contentStyle}
+                      itemStyle={tooltipStyle.itemStyle}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
               <CenterLabel />
             </div>
 
