@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Celestium — Decentralized Gaming Platform",
+  title: "Celestium",
   description:
     "Celestium is a DeFi ecosystem of smart contracts powering decentralized gaming and staking, unified by the CELT token.",
 };

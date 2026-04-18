@@ -15,7 +15,7 @@ type Coin = {
 };
 
 const COIN_COUNT = 6;
-const COIN_SRC = "/bet-coin-4.03f841cd.png";
+const COIN_SRC = "/celestium-con-nobg.png";
 
 let nextId = 0;
 
