@@ -26,7 +26,7 @@ export function Hero() {
             <Reveal direction="up" delay={0.25}>
               <div className="mt-8 flex flex-col gap-4 md:flex-row md:gap-6">
                 {/* Hover swap: primary "TRY OUR PARTNERS" → two partner links */}
-                <div className="group/cta relative h-10 w-[260px] shrink-0">
+                <div className="group/cta relative h-10 w-[240px] md:w-[320px] shrink-0">
                   <button
                     type="button"
                     className="absolute inset-0 inline-flex items-center justify-center rounded-md bg-yellow-400 px-4 text-xs font-bold tracking-wider whitespace-nowrap text-black uppercase opacity-100 transition-opacity duration-200 group-hover/cta:pointer-events-none group-hover/cta:opacity-0 focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none"
