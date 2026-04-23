@@ -1,7 +1,15 @@
 "use client";
 
 import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
-import type { ReactNode } from "react";
+import { useSyncExternalStore, type ReactNode } from "react";
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+}
 
 type Direction = "up" | "down" | "left" | "right" | "fade";
 
@@ -33,7 +41,9 @@ export function Reveal({
   className,
   ...rest
 }: RevealProps) {
-  const reduce = useReducedMotion();
+  const mounted = useIsMounted();
+  const reducedMotion = useReducedMotion();
+  const reduce = mounted && reducedMotion;
   const offset = reduce ? {} : variants[direction];
 
   return (
