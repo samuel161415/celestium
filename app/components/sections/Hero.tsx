@@ -56,6 +56,8 @@ export function Hero() {
                 <div className="flex flex-row items-center justify-center space-x-8 text-start md:flex-col md:items-start md:space-x-0 md:space-y-2">
                   <a
                     href="https://celestium-docs.gitbook.io/celestium-docs"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center space-x-2 text-[#6F6B81] transition-colors duration-300 hover:text-yellow-500"
                   >
                     <FileText size={18} className="opacity-60" />
