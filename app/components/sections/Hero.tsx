@@ -43,7 +43,7 @@ export function Hero() {
                       celestium.games
                     </a>
                     <a
-                      href="https://celestium.network"
+                      href="https://celestium.exchange"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex h-10 flex-1 items-center justify-center rounded-md bg-yellow-400 px-3 text-xs font-bold tracking-wider whitespace-nowrap text-black uppercase transition-colors duration-200 hover:bg-yellow-500"

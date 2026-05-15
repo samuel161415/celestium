@@ -468,13 +468,13 @@ const SOLUTIONS: SolutionCard[] = [
     title: "Service backed staking platform",
     iconSrc: "/download.svg",
     brand: "celestium.network",
-    href: "https://celestium.network",
+    href: "https://celestium.exchange",
   },
   {
     title: "Custom solution",
     iconSrc: "/custom-icon.1ea7d804.svg",
     brand: "celestium.network",
-    href: "https://celestium.network",
+    href: "https://celestium.exchange",
   },
 ];
 
@@ -534,7 +534,7 @@ export function Partner() {
         </Reveal>
 
         <div className="mt-4 flex flex-col items-center justify-between gap-3 md:flex-row">
-          <TryLink url="https://celestium.network" label="celestium.network" />
+          <TryLink url="https://celestium.exchange" label="celestium.network" />
           <TryLink url="https://celestium.games" label="celestium.games" />
         </div>
 
